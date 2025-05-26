@@ -1,4 +1,4 @@
-# remove-ads-and-pin
+# remove-ads
 
 ## 介紹
 
