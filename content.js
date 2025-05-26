@@ -1,14 +1,32 @@
-function isAdElement(el) {
-  const adKeywords = ['ad', 'ads', 'sponsor', 'banner'];
-  return adKeywords.some(keyword => el.className?.toLowerCase().includes(keyword));
-}
-
 function createPinnedArea() {
   if (document.getElementById('pinned-ads')) return;
 
   const pinnedArea = document.createElement('div');
   pinnedArea.id = 'pinned-ads';
   document.body.appendChild(pinnedArea);
+}
+
+function removeAndPinAds() {
+  const selectors = [
+    '#ad-ad9top3',
+    '#ad-ad6ins1p1',
+    '#ad-ad6ins2p2',
+    '#ad-ad9bottom3',
+    '.tpb-author',
+    'iframe[src*="ads"]',
+    'div[data-gc-test-id]'
+  ];
+
+  const pinnedArea = document.getElementById('pinned-ads');
+
+  selectors.forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => {
+      const clone = el.cloneNode(true);
+      clone.style.marginBottom = '10px';
+      pinnedArea.appendChild(clone);
+      el.remove();
+    });
+  });
 }
 
 function addNavigationLinks() {
@@ -35,22 +53,7 @@ function addNavigationLinks() {
   }
 }
 
-function removeAndPinAds() {
-  const candidates = document.querySelectorAll('iframe, div, section');
-  const pinnedArea = document.getElementById('pinned-ads');
-
-  candidates.forEach(el => {
-    if (isAdElement(el)) {
-      const clone = el.cloneNode(true);
-      clone.style.width = '100%';
-      clone.style.marginBottom = '10px';
-      pinnedArea.appendChild(clone);
-      el.remove();
-    }
-  });
-}
-
-(function() {
+(function () {
   createPinnedArea();
   removeAndPinAds();
   addNavigationLinks();

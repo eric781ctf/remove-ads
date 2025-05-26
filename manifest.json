@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "Ad Remover & Pinner",
-  "version": "1.1",
-  "description": "Remove ads and pin them. Toggle on/off via popup.",
+  "name": "Ad Pinner for Novel Site",
+  "version": "1.0",
+  "description": "Removes ads and pins navigation buttons on sport.thepaperbooks.com.",
   "permissions": ["scripting", "activeTab", "storage"],
-  "host_permissions": ["<all_urls>"],
+  "host_permissions": ["https://sport.thepaperbooks.com/*"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icons/icon.png"
