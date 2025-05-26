@@ -31,15 +31,28 @@ function repositionNavigationLinks() {
   }
 }
 
+function watchForDynamicAds() {
+  const observer = new MutationObserver(() => {
+    removeAds();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+}
+
 // 執行
 (function () {
   removeAds();
-  repositionNavigationLinks(); // 如果你想保留上一篇 / 下一篇釘在底部中央
+  repositionNavigationLinks();
+  watchForDynamicAds();
 })();
 
+// 改為強制刷新，確保下一頁重新載入 content script
 document.querySelectorAll('.prev a, .next a').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
-    location.href = a.href; // 強制刷新而非 JS 載入
+    location.href = a.href;
   });
 });
