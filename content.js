@@ -36,3 +36,10 @@ function repositionNavigationLinks() {
   removeAds();
   repositionNavigationLinks(); // 如果你想保留上一篇 / 下一篇釘在底部中央
 })();
+
+document.querySelectorAll('.prev a, .next a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    location.href = a.href; // 強制刷新而非 JS 載入
+  });
+});
